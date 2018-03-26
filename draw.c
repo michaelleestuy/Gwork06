@@ -46,6 +46,8 @@ void add_box( struct matrix * edges,
   add_edge(edges, x1, y2, z1, x1, y2, z2);
   add_edge(edges, x2, y1, z1, x2, y1, z2);
   add_edge(edges, x2, y2, z1, x2, y2, z2);
+
+  
 }
 
 /*======== void add_sphere() ==========
@@ -124,7 +126,7 @@ struct matrix * generate_sphere(double cx, double cy, double cz,
   ====================*/
 void add_torus( struct matrix * edges, 
                 double cx, double cy, double cz,
-                double r1, double r2, int step ) { //r1 = R r2 = r
+                double r1, double r2, int step ) { //r2 = R r1 = r
   double xo,yo,xi,yi,zo,zi;
   double theta,phi;
   int i,j;
@@ -135,9 +137,9 @@ void add_torus( struct matrix * edges,
     theta = (double)i/step * 2 * M_PI;
     for(j=1;j<=step;j++){
       phi = (double)j/step * 2 * M_PI;
-      xi = r2 * cos(phi) * cos(theta) + r1 * cos(phi) + cx;
-      yi = r2 * sin(theta) + cy;
-      zi = -1 * r2 * sin(phi) * cos(theta) - r1 * sin(phi) + cz;
+      xi = r1 * cos(phi) * cos(theta) + r2 * cos(phi) + cx;
+      yi = r1 * sin(theta) + cy;
+      zi = -1 * r1 * sin(phi) * cos(theta) - r2 * sin(phi) + cz;
       add_edge(edges,
 	       xo, yo, zo, xi, yi, zi);
       xo = xi;
